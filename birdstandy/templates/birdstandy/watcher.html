@@ -1,0 +1,9 @@
+{% extends 'birdstandy/base.html' %}
+{% block head %}
+    <title>Dane obserwatora</title>
+{% endblock %}
+{% block content %}
+    <h2>Dane obserwatora</h2>
+    <p>Imię: <b>{{ watcher.first_name }}</b></p>
+    <p>Nazwisko: <b>{{ watcher.last_name }}</b></p>
+{% endblock %}

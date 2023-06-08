@@ -1,0 +1,14 @@
+{% extends 'birdstandy/base.html' %}
+{% block head %}
+    <title>Formularz dodawania miejsca</title>
+{% endblock %}
+{% block content %}
+    <h2>Dane miejsca</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form }}
+        </table>
+        <button type="submit">Wyślij</button>
+    </form>
+{% endblock %}

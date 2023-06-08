@@ -1,0 +1,11 @@
+{% extends 'birdstandy/base.html' %}
+{% block head %}
+    <title>Dane miejsca</title>
+{% endblock %}
+{% block content %}
+    <h2>Dane miejsca</h2>
+    <p>Nazwa: <b>{{ place.name }}</b></p>
+    <p>Miasto: <b>{{ place.city }}</b></p>
+    <p>Country: <b>{{ place.country }}</b></p>
+    <hr>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'birdstandy/base.html' %}
+
+{% block head %}
+    <title>Ptakostan</title>
+{% endblock %}
+
+{% block content %}
+<h2>Ptaki:</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Nazwa</th>
+        <th>Nazwa naukowa</th>
+        <th>Waga</th>
+        <th>Długość [cm]</th>
+        <th>Gatunek</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for c in birds %}
+        <tr>
+            <td><a href='bird_detail/{{ c.id }}'>{{ c.name }}
+            </td>
+            <td>
+            {{ c.scientific_name }}
+            </td>
+            <td>
+            {{ c.weight }}
+            </td>
+            <td>
+                {{ c.length }}
+            </td>
+            <td>
+                {{ c.species }}
+            </td>
+            {% if request.user.is_authenticated %}
+            <td>
+               <a href='delete_bird/{{ c.id }}'>Usuń</a>
+            </td>
+            {% else %}
+
+            {% endif %}
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
+{% endblock %}
