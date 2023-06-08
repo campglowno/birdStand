@@ -1,9 +1,7 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.views.generic import CreateView, DeleteView, UpdateView, FormView
-from django.shortcuts import render
 from django.http import HttpResponse
-from .models import *
+from django.views.generic import FormView
 from .forms import *
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect
@@ -49,8 +47,12 @@ class BirdAddView(View):
                 length=form.cleaned_data['length'],
                 species=form.cleaned_data['species']
             )
-            return redirect(reverse('bird', args=[bird.pk]))
-
+            # return redirect(reverse('bird', args=[bird.pk]))
+            birds_list = Bird.objects.all()
+            ctx = {
+                "birds": birds_list
+            }
+            return render(request, "birdstandy/birds_list.html", ctx)
         ctx = {
             'form': form
         }
@@ -62,19 +64,16 @@ class BirdDetailView(View):
     def get(self, request, bird_id):
         bird = get_object_or_404(Bird, pk=bird_id)
         birdstands = BirdStand.objects.filter(bird_id=bird_id)
-        birdphoto = BirdPhoto.objects.filter(name_id=bird_id)
-        if birdphoto is not None:
+        try:
+            birdphoto = BirdPhoto.objects.filter(name_id=bird_id)[0] # jeśli zdjęć ptaka w bazie jest więcej wybiera first
             ctx = {
-                'bird': bird,
-                'birdstands': birdstands,
-                'birdphoto': birdphoto
+                    'bird': bird,
+                    'birdstands': birdstands,
+                    'birdphoto': birdphoto
             }
-        else:
-            ctx = {
-                'bird': bird,
-                'birdstands': birdstands
-            }
-        return render(request, 'birdstandy/bird.html', ctx)
+            return render(request, 'birdstandy/bird.html', ctx)
+        except IndexError:
+            return HttpResponse(f'Dodaj zdjęcie ptaka "{bird}" do bazy!')
 
 
 # usuwanie ptaka z bazy, możliwe tylko dla użytkownika zalogowanego
@@ -117,6 +116,7 @@ class PlaceAddView(View):
             'form': form
         }
         return render(request, 'birdstandy/place_form.html', ctx)
+
 
 # wyświetlenie szczegółowego widoku miejsca
 class PlaceDetailView(View):
@@ -214,7 +214,6 @@ class BirdStandView(View):
         return render(request, "birdstandy/birdstand.html", ctx)
 
 
-
 # widok użytkownika pojedynczego w bazie
 class UsersView(View):
     def get(self, request):
@@ -241,7 +240,6 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect('index')
-
 
 
 # widok dodawania użytkownika do bazy
