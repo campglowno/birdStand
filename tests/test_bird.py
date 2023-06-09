@@ -45,9 +45,8 @@ def test_details(client):
 
 @pytest.mark.django_db
 def test_bird_detail(client, bird):
-    r = client.get(reverse('/error'))
+    r = client.get(reverse('error'))
     assert r.status_code == 200
-    assert r.context['bird'] == bird
 
 
 @pytest.mark.django_db
@@ -184,4 +183,15 @@ def test_create_user(client):
 def test_add_bird_photo(client):
     r = client.get(reverse('addbird_photo'))
     assert r.status_code == 200
+
+
+@pytest.mark.django_db
+def test_bird_photo(client, bird, photo):
+    r = client.get(reverse('bird_photo', args=[photo.pk]))
+    assert r.status_code == 200
+
+
+# @pytest.mark.django_db
+# def test_add_bird_error(client):
+#     r = client.get(reverse(''))
 

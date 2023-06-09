@@ -1,5 +1,5 @@
 import pytest
-from birdstandy.models import Bird, Place, BirdStand, Watcher
+from birdstandy.models import Bird, Place, BirdStand, Watcher, BirdPhoto
 from django.test import Client
 from django.contrib.auth.models import User, Permission
 import credentials
@@ -101,5 +101,10 @@ def users():
     ]
 
 
-
+@pytest.fixture
+def photo():
+    return BirdPhoto.objects.create(
+        image='static/drozd.jpg',
+        name_id='1',
+    )
 
