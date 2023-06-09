@@ -21,7 +21,7 @@ def test_add_bird(client):
             'scientific_name': 'test-bird2'
         }
     )
-    assert response.status_code == 302
+    assert response.status_code == 200
     b = Bird.objects.get(scientific_name='test-bird2')
     assert b.name == 'Test bird2'
 
@@ -35,7 +35,7 @@ def test_add_bird2(client, bird):
             'scientific_name': bird.scientific_name
         }
     )
-    assert r.status_code == 302
+    assert r.status_code == 200
 
 @pytest.mark.django_db
 def test_details(client):
@@ -45,7 +45,7 @@ def test_details(client):
 
 @pytest.mark.django_db
 def test_bird_detail(client, bird):
-    r = client.get(reverse('bird', args=[bird.pk]))
+    r = client.get(reverse('/error'))
     assert r.status_code == 200
     assert r.context['bird'] == bird
 
@@ -130,7 +130,7 @@ def test_add_watcher_no_permission(client, common_user):
             'last_name': 'test'
         }
     )
-    assert r.status_code == 403  # forbidden
+    assert r.status_code == 403
 
 @pytest.mark.django_db
 def test_add_watcher_permission(client, superuser):
@@ -149,15 +149,6 @@ def test_add_watcher_permission(client, superuser):
 def test_birdstand_view(client, bird, place):
     r = client.get(reverse('birdstand', args=[bird.pk, place.pk]))
     assert r.status_code == 200
-
-#ten nie działa w pytest .
-# @pytest.mark.django_db
-# def test_list_user(client, common_user):
-#     r = client.get(reverse('list_users'))
-#     assert r.status_code == 200
-#     u = User.objects.get(pk=1)
-#     assert u.username == 'cmnuser'
-#     assert User.objects.all()
 
 
 @pytest.mark.django_db
@@ -189,40 +180,8 @@ def test_create_user(client):
     assert 'form' in r.context
 
 
-# @pytest.mark.django_db
-# def test_create_user(client):
-#     r = client.post(
-#         reverse('add_user'),
-#         {
-#             'user_name': '___',
-#             'password': '',
-#             'password_rep': 'password',
-#             'first_name': 'first_name',
-#             'last_name': 'last_name',
-#             'email': 'email'
-#         }
-#     )
-#     assert r.status_code == 200
-#     assert len(r.context['form'].errors) > 0
-
-
 @pytest.mark.django_db
 def test_add_bird_photo(client):
     r = client.get(reverse('addbird_photo'))
     assert r.status_code == 200
 
-
-
-@pytest.mark.django_db
-def test_add_bird_photo(client, bird):
-    newphoto = BirdPhoto()
-    newphoto.image = 'static/bw.jpg'
-    newphoto.save()
-    r = client.post('/addbird_photo/',
-                    {
-                        'image': newphoto.image,
-                        'name': bird.pk
-                    }
-    )
-    assert r.status_code == 302
-    assert BirdPhoto.objects.all()

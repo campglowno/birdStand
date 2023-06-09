@@ -4,12 +4,12 @@
 {% endblock %}
 {% block content %}
     <h2>Dane ptaka</h2>
-    <p>Nazwa: <b>{{ bird.name }}</b></p>
-    <p>Nazwa naukowa: <b>{{ bird.scientific_name }}</b></p>
-    <p>Waga: <b>{{ bird.weight }}</b></p>
-    <p>Długość: <b>{{ bird.length }}</b></p>
-    <p>Gatunek: <b>{{ bird.species }}</b></p>
-     <p>
+    <p class="nav">Nazwa: <b>{{ bird.name }}</b></p>
+    <p class="nav">Nazwa naukowa: <b>{{ bird.scientific_name }}</b></p>
+    <p class="nav">Waga: <b>{{ bird.weight }}</b></p>
+    <p class="nav">Długość: <b>{{ bird.length }}</b></p>
+    <p class="nav">Gatunek: <b>{{ bird.species }}</b></p>
+     <p class="nav">
         Miejsca wystąpienia:
         {% for b in birdstands %}
             {{ b.place }}{% if not forloop.last %}//{% endif %}

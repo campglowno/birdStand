@@ -73,7 +73,7 @@ class BirdDetailView(View):
             }
             return render(request, 'birdstandy/bird.html', ctx)
         except IndexError:
-            return HttpResponse(f'Dodaj zdjęcie ptaka "{bird}" do bazy!')
+            return render(request, 'birdstandy/error.html', context=None)
 
 
 # usuwanie ptaka z bazy, możliwe tylko dla użytkownika zalogowanego

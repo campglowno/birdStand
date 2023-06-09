@@ -1,11 +1,9 @@
 body {
     background: floralwhite;
     padding: 0.5rem 2rem;
-    align: center
 }
 
-h1, h2 {
-    align: center;
+h2 {
     color: lightcoral;
     margin-top: 0;
     margin-bottom: 2rem;
@@ -14,7 +12,6 @@ h1, h2 {
 table {
     width: 600px;
     border-collapse: collapse;
-    border: 1px
 }
 th {
     border:1px solid #ddd;
@@ -55,7 +52,7 @@ div.content {
     border-radius: 4px;
 }
 
-button, a.btn-link {
+a.btn-link {
     margin-left: 1rem;
     margin-right: 1rem;
     background-color: blanchedalmond;
@@ -79,7 +76,7 @@ a.btn-link:active {
     display: block;
 }
 
-footer, header {
+footer {
     padding: 1rem 1rem;
     box-shadow: 0 2px 4px lightgray;
     margin-top: 2rem;
@@ -94,19 +91,4 @@ ul.errorlist {
     list-style: none;
     margin-left: 0;
     padding-left: 0;
-}
-
-img.logo {
-    height: 2rem;
-    vertical-align: middle;
-    margin-right: 4rem;
-}
-.helptext {
-    font-size: small;
-                color: darkgray;
-            }
-
-.errorlist {
-    font-weight: bold;
-    color: red;
 }

@@ -10,9 +10,9 @@ class BirdForm(forms.Form):
                                      'required': 'Nazwa nie może być pusta!'
                                  })
     scientific_name = forms.CharField(max_length=64, label='Nazwa naukowa')
-    weight = forms.IntegerField(required=False,label='waga [g]')
-    length = forms.IntegerField(required=False, label='długość [cm]')
-    species = forms.CharField(required=False, max_length=64, label='gatunek')
+    weight = forms.IntegerField(required=False,label='Waga [g]')
+    length = forms.IntegerField(required=False, label='Długość [cm]')
+    species = forms.CharField(required=False, max_length=64, label='Gatunek')
 
 
 class PlaceForm(forms.Form):

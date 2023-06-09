@@ -3,21 +3,7 @@
     <title>Dane ptaka</title>
 {% endblock %}
 {% block content %}
-    <h2>Dane ptaka</h2>
-    <p>Nazwa: <b>{{ bird.name }}</b></p>
-    <p>Nazwa naukowa: <b>{{ bird.scientific_name }}</b></p>
-    <p>Waga: <b>{{ bird.weight }}</b></p>
-    <p>Długość: <b>{{ bird.length }}</b></p>
-    <p>Gatunek: <b>{{ bird.species }}</b></p>
-    <p>Zdjęcie: <b><img src="/{{ birdphoto.image }}"></b></p>
-
-    <p>
-        Miejsca wystąpienia:
-        {% for b in birdstands %}
-            <p><b>{{ b.place }}{% if not forloop.last %}//{% endif %}</b></p>
-        {% empty %}
-            brak
-        {% endfor %}
-    </p>
+    <h2>Error!</h2>
+    <p class="nav">Dodaj zdjęcie ptaka do bazy - będzie to dowód zaobserwowania ptaka!
     <hr>
 {% endblock %}

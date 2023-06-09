@@ -24,11 +24,87 @@
                 color: red;
             }
 
-            footer {
+            footer, header {
+                margin-left: auto;
+                margin-right: auto;
+                padding: 1rem 1rem;
+                box-shadow: 0 2px 4px lightgray;
                 margin-top: 2rem;
-                border-top: 1px solid lightgray;
-                padding: 1rem;
-                background-color: aliceblue;
+                margin-bottom: 2rem;
+                background-color: antiquewhite;
+                border-radius: 4px;
+            }
+
+            table {
+                margin-left: auto;
+                margin-right: auto;
+                width: 600px;
+                border-collapse: collapse;
+                border: 1px
+            }
+            th {
+                border:1px solid #ddd;
+                vertical-align: middle;
+            }
+            thead td,
+            thead th {
+                background: #FF6347;
+                color: #fff;
+                padding-top:5px;
+                padding-bottom:5px;
+            }
+            thead {}
+            tr td {
+                padding:15px;
+                border:1px solid #ddd;
+                text-align: center;
+            }
+            tr td:nth-of-type(5) {
+                background: #FF6347;
+                color: #fff;
+            }
+
+            p.nav {
+                padding: 1rem 1rem;
+                box-shadow: 0 2px 4px lightgray;
+                margin-bottom: 2rem;
+                background-color: antiquewhite;
+                border-radius: 4px;
+            }
+
+            ul li {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            div.content {
+                box-shadow: 0 2px 4px lightgray;
+                padding: 1rem 1rem;
+                border-radius: 4px;
+            }
+
+            a.btn-link {
+                margin-left: 1rem;
+                margin-right: 1rem;
+                background-color: blanchedalmond;
+                border-radius: 4px;
+                text-decoration: none;
+                padding: 0.2rem 1rem;
+                box-shadow: 0 1px 2px gray;
+            }
+
+            a.btn-link:hover {
+                box-shadow: 0 2px 3px gray;
+            }
+
+            a.btn-link:active {
+                box-shadow: none;
+            }
+
+            .helptext {
+                font-size: x-small;
+                color: gray;
+                display: block;
             }
         </style>
     </head>
@@ -37,28 +113,28 @@
             <img src="{% static 'logo.png' %}" class="logo" alt="logo witryny">
             Ptakostan
         </h1>
-
+        <header>
+             {% if request.user.is_authenticated %}
+                Zalogowany użytkownik:
+                <b>{{ request.user.username }}</b>
+                <a href="{% url 'logout' %}" class="btn-link">Wyloguj</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn-link">Zaloguj</a>
+            {% endif %}
+              <a href="{% url 'reset_password' %}" class="btn-link">Zmień hasło</a>
+        </header>
         {% block content %}
 
         {% endblock %}
 
         <footer>
-                <a href="{% url 'index' %}">Strona główna</a>|
-                <a href="{% url 'add_bird' %}">Dodaj ptaka</a>|
-                <a href="{% url 'add_place' %}">Dodaj miejsce</a>|
-                <a href="{% url 'add_watcher' %}">Dodaj obserwatora</a>|
-                <a href="{% url 'add_birdstand' %}">Dodaj wystąpienie</a>|
-                <a href="{% url 'addbird_photo' %}">Dodaj zdjęcie</a>|
-                 <a href="{% url 'reset_password' %}">Zmień hasło</a>|
+                <a href="{% url 'index' %}" class="btn-link">Strona główna</a>
+                <a href="{% url 'add_bird' %}" class="btn-link">Dodaj ptaka</a>
+                <a href="{% url 'add_place' %}" class="btn-link">Dodaj miejsce</a>
+                <a href="{% url 'add_watcher' %}" class="btn-link">Dodaj obserwatora</a>
+                <a href="{% url 'add_birdstand' %}" class="btn-link">Dodaj wystąpienie</a>
+                <a href="{% url 'addbird_photo' %}" class="btn-link">Dodaj zdjęcie</a>
 
-             <hr>
-             {% if request.user.is_authenticated %}
-                Zalogowany użytkownik:
-                <b>{{ request.user.username }}</b>
-                <a href="{% url 'logout' %}">Wyloguj</a>
-            {% else %}
-                <a href="{% url 'login' %}">Zaloguj</a>
-            {% endif %}
         </footer>
     </body>
 </html>
