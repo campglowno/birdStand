@@ -308,3 +308,12 @@ class BirdPhotoView(View):
             'birdphoto': birdphoto
         }
         return render(request, 'birdstandy/bird_photo.html', ctx)
+
+
+class AddPhotoErrorView(View):
+    def get(self, request):
+        birds_list = Bird.objects.all()
+        ctx = {
+            'birds_list': birds_list
+        }
+        return render(request, 'birdstandy/error.html', ctx)

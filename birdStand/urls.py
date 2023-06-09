@@ -34,6 +34,7 @@ urlpatterns = [
     path('addbird_photo/', AddBirdPhotoView.as_view(), name='addbird_photo'),
     path('bird_photo/<int:photo_id>', BirdPhotoView.as_view(), name='bird_photo'),
     path('delete_bird/<int:bird_id>', DeleteBirdView.as_view(), name='delete_bird'),
+    path('error/', AddPhotoErrorView.as_view(), name='error'),
 
     path('list_users/', UsersView.as_view(), name='list_users'),
     path('login/', LoginView.as_view(), name='login'),
